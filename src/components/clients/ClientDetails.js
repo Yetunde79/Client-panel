@@ -8,8 +8,61 @@ import { firestoreConnect } from "react-redux-firebase";
 import classnames from "classnames";
 
 class ClientDetails extends Component {
+  state = {
+    showBalanceUpdate: false,
+    balanceUpdateAmount: ""
+  };
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  balanceSubmit = e => {
+    e.preventDefault();
+
+    const { client, firestore } = this.props;
+    const { balanceUpdateAmount } = this.state;
+
+    const clientUpdate = {
+      balance: parseFloat(balanceUpdateAmount)
+    };
+
+    //update in firestore
+
+    firestore.update({ collection: "clients", doc: client.id }, clientUpdate); //2nd param is what we want to update with
+  };
   render() {
     const { client } = this.props;
+    const { showBalanceUpdate, balanceUpdateAmount } = this.state;
+
+    let balanceForm = "";
+
+    if (showBalanceUpdate) {
+      //balance form should display
+      balanceForm = (
+        <form onSubmit={this.balanceSubmit}>
+          <div className="input-group">
+            <input
+              type="text"
+              className="form-control"
+              name="balanceUpdateAmount"
+              placeholder="Add new balance"
+              value={balanceUpdateAmount}
+              onChange={this.onChange}
+            />
+            <div className="input-group-append">
+              <input
+                type="submit"
+                value="Update"
+                className="btn btn-outline-dark"
+              />
+            </div>
+          </div>
+        </form>
+      );
+    } else {
+      balanceForm = null;
+    }
 
     if (client) {
       return (
@@ -54,9 +107,22 @@ class ClientDetails extends Component {
                     >
                       {" "}
                       ${parseFloat(client.balance).toFixed(2)}
-                    </span>
+                    </span>{" "}
+                    <small>
+                      <a
+                        href="#!"
+                        onClick={() =>
+                          this.setState({
+                            showBalanceUpdate: !this.state.showBalanceUpdate //if true becomes false and vice-versa
+                          })
+                        }
+                      >
+                        <i className="fas fa-pencil-alt" />
+                      </a>
+                      {/*link doesnt go anywhere, onclick handles what happens*/}
+                    </small>
                   </h3>
-                  {/* @todo balance form */}
+                  {balanceForm}
                 </div>
               </div>
 
