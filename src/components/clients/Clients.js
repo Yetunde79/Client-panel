@@ -17,6 +17,7 @@ class Clients extends Component {
     if (clients) {
       //add balances
       const total = clients.reduce((total, client) => {
+        //reduce func reduces array to single value, 2nd param is initial value
         return total + parseFloat(client.balance.toString());
       }, 0);
 

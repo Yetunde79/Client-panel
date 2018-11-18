@@ -31,6 +31,15 @@ class ClientDetails extends Component {
 
     firestore.update({ collection: "clients", doc: client.id }, clientUpdate); //2nd param is what we want to update with
   };
+
+  //delete client
+  onDeleteClick = () => {
+    const { client, firestore, history } = this.props;
+    firestore
+      .delete({ collection: "clients", doc: client.id })
+      .then(history.push("/"));
+  };
+
   render() {
     const { client } = this.props;
     const { showBalanceUpdate, balanceUpdateAmount } = this.state;
@@ -78,7 +87,9 @@ class ClientDetails extends Component {
                 <Link to={`/client/edit/${client.id}`} className="btn btn-dark">
                   Edit
                 </Link>
-                <button className="btn btn-danger">Delete</button>
+                <button onClick={this.onDeleteClick} className="btn btn-danger">
+                  Delete
+                </button>
               </div>
             </div>
           </div>
