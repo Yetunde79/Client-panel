@@ -12,6 +12,7 @@ import ClientDetails from "./components/clients/ClientDetails";
 import Login from "./components/auth/Login";
 
 import "./App.css";
+require("dotenv").config();
 
 class App extends Component {
   render() {
