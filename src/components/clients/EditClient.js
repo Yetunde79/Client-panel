@@ -68,7 +68,8 @@ class EditClient extends Component {
                     name="firstName"
                     minLength="2"
                     required
-                    ref={this.firstNameInput} //we use this bcse we can't connect values directly to state
+                    ref={this.firstNameInput} //ref: to access DOM nodes directly within React. eg when you want to change the child of a component.
+                    //we use this bcse we can't connect values directly to state, u need to define in constructor
                     onChange={this.onChange}
                     defaultValue={client.firstName} //defaultvalue so we can edit it instead of value just showing up*/
                   />
