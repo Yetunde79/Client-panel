@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 // import { compose } from "redux";
 // import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
+import { firestoreConnect } from "react-redux-firebase"; //deals with data
 
 class AddClient extends Component {
   state = {
