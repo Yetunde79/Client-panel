@@ -12,6 +12,9 @@ class Clients extends Component {
   };
 
   static getDerivedStateFromProps(props, state) {
+    //invoked right before calling the render method.
+    //used when state depends on changes in props over time.
+
     const { clients } = props; //props dont come into static methods but it comes from the param so no need for this.props
 
     if (clients) {
