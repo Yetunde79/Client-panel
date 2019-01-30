@@ -1,13 +1,3 @@
 .hscroll {
   overflow-x: auto; /* Horizontal */
 }
-
-/* .table {
-  width: 80%;
-  border-collapse: collapse;
-  overflow-y: scroll;
-}
-
-td {
-  width: 25%;
-} */
