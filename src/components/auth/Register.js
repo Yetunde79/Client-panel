@@ -10,7 +10,7 @@ import Alert from "../layout/Alert";
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
   };
 
   componentDidMount() {
@@ -21,7 +21,7 @@ class Login extends Component {
     }
   }
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const { firebase, notifyUser } = this.props;
@@ -29,10 +29,12 @@ class Login extends Component {
     //register with firebase
     firebase
       .createUser({ email, password })
-      .catch(err => notifyUser("That user already exists", "error"));
+      .catch((err) =>
+        notifyUser("Password must be at least 6 characters ", "error")
+      );
   };
 
-  onChange = e => {
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -94,7 +96,7 @@ class Login extends Component {
 Login.propTypes = {
   firebase: PropTypes.object.isRequired,
   notify: PropTypes.object.isRequired,
-  notifyUsers: PropTypes.func.isRequired
+  notifyUsers: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -102,7 +104,7 @@ export default compose(
   connect(
     (state, props) => ({
       notify: state.notify,
-      settings: state.settings
+      settings: state.settings,
     }),
     { notifyUser }
   ) //actions go in here
